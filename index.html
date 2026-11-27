@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b0f19">
+  <link rel="icon" href="logo.png">
+  <title>Master Auto Service Caicó - Calculadora & Orçamento</title>
+
+  <!-- html2canvas para conversão do orçamento em imagem -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+  <!-- Vinculação do CSS Externo -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="app-container">
+    
+    <!-- PAINEL DE CONTROLE / EDITÁVEL -->
+    <div class="card-editor">
+      <div class="editor-header">
+        <div class="header-logo-title">
+          <!-- Logo SVG Master Auto Service -->
+          <img class="logo-svg" src="data:image/jpeg;base64,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" alt="Logo Master Auto Service">
+          <div>
+            <h1>MASTER <span>AUTO SERVICE</span></h1>
+            <p class="sub-header-title">Oficina Mecânica - Caicó/RN</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="editor-body">
+        <div class="section-title">Dados do Cliente & Veículo</div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="inp-cliente">Nome do Cliente</label>
+            <input type="text" id="inp-cliente" value="Karlyson Alison ">
+          </div>
+          <div class="form-group">
+            <label for="inp-carro">Modelo do Carro</label>
+            <input type="text" id="inp-carro" value="Toyota Corolla 2.0">
+          </div>
+          <div class="form-group">
+            <label for="inp-placa">Placa do Veículo</label>
+            <input type="text" id="inp-placa" value="KLR-8A90">
+          </div>
+          <div class="form-group">
+            <label for="inp-pagamento">Forma de Pagamento</label>
+            <select id="inp-pagamento">
+              <option value="Cartão de Crédito" selected>Cartão de Crédito (+16%)</option>
+              <option value="PIX / À Vista">PIX / À Vista</option>
+              <option value="Dinheiro">Dinheiro</option>
+            </select>
+          </div>
+          <div class="form-group" id="grupo-parcelas">
+            <label for="inp-parcelas">Parcelas (até 10x)</label>
+            <select id="inp-parcelas"><option value="1">1x</option><option value="2">2x</option><option value="3">3x</option><option value="4">4x</option><option value="5">5x</option><option value="6">6x</option><option value="7">7x</option><option value="8">8x</option><option value="9">9x</option><option value="10">10x</option></select>
+          </div>
+        </div>
+
+        <div class="section-title">Serviços e Peças</div>
+        <div class="rapidos-label">Serviços rápidos (toque para adicionar)</div>
+        <div class="chips-rapidos" id="chips-rapidos"></div>
+        <table class="table-editor">
+          <thead>
+            <tr>
+              <th>Descrição do Serviço/Peça</th>
+              <th class="col-qtd">Qtd</th>
+              <th class="col-valor">Unitário (R$)</th>
+              <th class="col-acao"></th>
+            </tr>
+          </thead>
+          <tbody id="tbody-itens">
+            <!-- Inserido via JS -->
+          </tbody>
+        </table>
+        <button id="btn-adicionar-item" class="btn-add">+ Adicionar Item</button>
+
+        <div class="section-title">Desconto & Ajuste de Taxa</div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="inp-desconto">Desconto (R$)</label>
+            <input type="number" id="inp-desconto" value="0" min="0">
+          </div>
+
+          <div class="form-group">
+            <label for="inp-repassar-taxa">Quem Paga a Taxa de 16%?</label>
+            <select id="inp-repassar-taxa">
+              <option value="repassar" selected>Acrescentar no Total (Cliente)</option>
+              <option value="absorver">Absorver no Lucro (Oficina)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="inp-validade">Validade do Orçamento</label>
+            <select id="inp-validade">
+              <option value="3">3 dias</option>
+              <option value="7" selected>7 dias</option>
+              <option value="15">15 dias</option>
+              <option value="30">30 dias</option>
+            </select>
+          </div>
+          <div class="form-group form-group-wide">
+            <label for="inp-obs">Observações (opcional)</label>
+            <textarea id="inp-obs" rows="2" placeholder="Ex.: Garantia de 90 dias nos serviços."></textarea>
+          </div>
+        </div>
+
+        <div class="actions-bar">
+          <button id="btn-copiar-wa" class="btn-action btn-whatsapp">
+            📋 Copiar Imagem para WhatsApp (Ctrl+V)
+          </button>
+          <button id="btn-compartilhar" class="btn-action btn-share">
+            📤 Compartilhar (Celular)
+          </button>
+          <button id="btn-baixar-png" class="btn-action btn-download">
+            💾 Baixar Imagem (PNG)
+          </button>
+          <button id="btn-salvar" class="btn-action btn-secondary">
+            💾 Salvar no Histórico
+          </button>
+          <button id="btn-novo" class="btn-action btn-secondary">
+            🆕 Novo Orçamento
+          </button>
+        </div>
+
+        <div class="section-title section-hist">Orçamentos Recentes</div>
+        <div id="historico" class="historico"></div>
+      </div>
+    </div>
+
+    <!-- ÁREA VISUAL DO ORÇAMENTO (GERAÇÃO DE IMAGEM) -->
+    <div class="preview-wrapper">
+      <div id="orcamento-preview">
+        
+        <div class="preview-header">
+          <div class="preview-brand-container">
+            <!-- Logo Incorporada no Comprovante -->
+            <img class="preview-logo-svg" src="data:image/jpeg;base64,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" alt="Logo Master Auto Service">
+            <div class="preview-brand">
+              <h2>MASTER <span>AUTO SERVICE</span></h2>
+              <p>OFICINA MECÂNICA • Caicó - RN</p>
+            </div>
+          </div>
+          <div class="preview-meta">
+            <div><strong>Data:</strong> <span id="view-data">--/--/----</span></div>
+            <div><strong>Orçamento:</strong> #<span id="view-codigo">1001</span></div>
+          </div>
+        </div>
+
+        <div class="preview-body">
+          <div class="preview-info-grid">
+            <div class="preview-info-item">
+              <span class="lbl">Cliente</span>
+              <span class="val" id="view-cliente">Karlyson Alison</span>
+            </div>
+            <div class="preview-info-item">
+              <span class="lbl">Veículo</span>
+              <span class="val" id="view-carro">Corolla</span>
+            </div>
+            <div class="preview-info-item">
+              <span class="lbl">Placa</span>
+              <span class="val" id="view-placa">KLR-8A90</span>
+            </div>
+            <div class="preview-info-item">
+              <span class="lbl">Pagamento</span>
+              <span class="val" id="view-pagamento">Cartão de Crédito</span>
+            </div>
+          </div>
+
+          <table class="preview-table">
+            <thead>
+              <tr>
+                <th>Descrição do Serviço / Peça</th>
+                <th class="col-qtd-preview">Qtd</th>
+                <th class="col-unit-preview">Unit.</th>
+                <th class="col-total-preview">Total</th>
+              </tr>
+            </thead>
+            <tbody id="view-tbody">
+              <!-- Espelhamento -->
+            </tbody>
+          </table>
+
+          <div class="preview-summary-container">
+            <div class="preview-summary-box">
+              <div class="preview-summary-row" id="row-view-subtotal">
+                <span>Subtotal:</span>
+                <span id="view-subtotal">R$ 0,00</span>
+              </div>
+              <div class="preview-summary-row" id="row-view-desconto">
+                <span>Desconto:</span>
+                <span id="view-desconto">R$ 0,00</span>
+              </div>
+              <div class="preview-summary-row" id="row-view-taxa">
+                <span>Acréscimo (16%):</span>
+                <span id="view-taxa">R$ 0,00</span>
+              </div>
+              <div class="preview-summary-row total" id="row-view-total">
+                <span id="lbl-total">Total Final:</span>
+                <span class="price" id="view-total">R$ 0,00</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="preview-obs" id="row-obs" style="display:none">
+            <span class="lbl">Observações</span>
+            <p id="view-obs"></p>
+          </div>
+
+          <div class="preview-validade">Orçamento válido até <strong id="view-validade">--/--/----</strong></div>
+
+          <div class="preview-footer">
+            <p><strong>Master Auto Service Caicó</strong> • Manutenção e Diagnóstico Avançado</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <div id="toast">Imagem copiada com sucesso! Abra o WhatsApp e pressione Ctrl+V.</div>
+
+  <script src="script.js"></script>
+</body>
+</html>
